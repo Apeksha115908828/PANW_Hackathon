@@ -6,10 +6,9 @@ public class Suggestion {
     private String title;
     private String action;
     private String rationale;
-    private String leverType; // variable_trim, subscription_cleanup, income, timeline
-    private BigDecimal impactPerMonth = BigDecimal.ZERO; // $/month
+    private String leverType;
+    private BigDecimal impactPerMonth = BigDecimal.ZERO;
 
-    // Optional: for timeline lever
     private Integer newMonthsToDeadline;
     private BigDecimal newRequiredMonthly;
 

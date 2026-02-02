@@ -6,7 +6,6 @@ import com.panw.hackathon.model.GoalRequest;
 import com.panw.hackathon.model.Transaction;
 import com.panw.hackathon.service.ForecastService;
 import com.panw.hackathon.util.CsvParser;
-import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

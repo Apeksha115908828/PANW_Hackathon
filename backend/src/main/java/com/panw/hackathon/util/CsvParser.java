@@ -20,8 +20,13 @@ public class CsvParser {
     public static List<Transaction> parseTransactions(MultipartFile file) throws IOException {
         List<Transaction> list = new ArrayList<>();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // default
+        CSVFormat format = CSVFormat.DEFAULT.builder()
+            .setHeader()
+            .setSkipHeaderRecord(true)
+            .setTrim(true)
+            .build();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
-             CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withTrim())) {
+             CSVParser parser = new CSVParser(reader, format)) {
             for (CSVRecord record : parser) {
                 String dateStr = get(record, "date");
                 LocalDate date = parseDate(dateStr, df);
@@ -44,7 +49,6 @@ public class CsvParser {
     private static LocalDate parseDate(String val, DateTimeFormatter defaultFmt) {
         String s = val == null ? "" : val.trim();
         if (s.isEmpty()) return LocalDate.now();
-        // Try common formats
         String[] patterns = new String[]{"yyyy-MM-dd", "MM/dd/yyyy", "dd/MM/yyyy"};
         for (String p : patterns) {
             try {
